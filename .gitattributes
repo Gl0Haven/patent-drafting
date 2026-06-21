@@ -1,0 +1,8 @@
+# 统一行尾，避免 Windows 开发 / Linux·Mac 克隆时 CRLF 串入
+* text=auto eol=lf
+# shell 脚本必须保持 LF，否则 bash 因 \r 报错（cannot execute）
+*.sh text eol=lf
+# 二进制类型，禁止行尾/编码转换
+*.png binary
+*.docx binary
+*.pdf binary

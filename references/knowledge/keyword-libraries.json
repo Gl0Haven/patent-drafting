@@ -1,0 +1,369 @@
+{
+  "keyword_libraries": {
+    "version": "1.0.0",
+    "updated_at": "2024-01-01",
+    "libraries": {
+      "algorithm_problem_keywords": {
+        "name": "算法问题关键词",
+        "description": "识别声称解决算法/计算问题的关键词",
+        "keywords": [
+          "计算复杂度",
+          "收敛速度",
+          "迭代次数",
+          "计算效率",
+          "精度不足",
+          "误差大",
+          "偏差",
+          "特征选择困难",
+          "维度灾难",
+          "模型训练",
+          "过拟合",
+          "欠拟合",
+          "收敛性",
+          "全局最优",
+          "局部最优",
+          "参数调优",
+          "超参数",
+          "学习率",
+          "损失函数",
+          "梯度下降"
+        ],
+        "category": "负面信号"
+      },
+      "business_rule_keywords": {
+        "name": "商业规则关键词",
+        "description": "识别商业管理效率相关问题的关键词",
+        "keywords": [
+          "效率低",
+          "成本高",
+          "管理混乱",
+          "用户体验差",
+          "转化率低",
+          "资源浪费",
+          "流程繁琐",
+          "审批慢",
+          "人力成本",
+          "营销效果",
+          "客户流失",
+          "库存积压",
+          "订单处理",
+          "物流效率",
+          "供应链",
+          "销售业绩",
+          "用户粘性",
+          "市场拓展",
+          "品牌知名度",
+          "竞争优势"
+        ],
+        "category": "负面信号"
+      },
+      "technical_problem_keywords": {
+        "name": "技术问题关键词",
+        "description": "识别技术领域实际问题的关键词",
+        "keywords": [
+          "噪声干扰",
+          "信号衰减",
+          "设备故障",
+          "性能下降",
+          "能耗过高",
+          "散热不足",
+          "传输延迟",
+          "带宽不足",
+          "干扰信号",
+          "多径效应",
+          "信道衰落",
+          "频率选择",
+          "天线增益",
+          "功率消耗",
+          "电池续航",
+          "响应时间",
+          "处理速度",
+          "吞吐量",
+          "误码率",
+          "丢包率",
+          "抖动",
+          "抖动控制",
+          "同步误差",
+          "时钟漂移",
+          "温度漂移",
+          "精度损失",
+          "量化误差",
+          "采样率",
+          "带宽限制",
+          "滤波效果",
+          "信噪比",
+          "分辨率",
+          "动态范围"
+        ],
+        "category": "正面信号"
+      },
+      "algorithm_effect_indicators": {
+        "name": "算法效果指标库",
+        "description": "算法性能相关指标，属于非技术效果",
+        "indicators": [
+          {
+            "name": "准确率",
+            "alias": ["Accuracy", "正确率"],
+            "type": "分类",
+            "category": "非技术效果"
+          },
+          {
+            "name": "精确率",
+            "alias": ["Precision", "查准率"],
+            "type": "分类",
+            "category": "非技术效果"
+          },
+          {
+            "name": "召回率",
+            "alias": ["Recall", "查全率"],
+            "type": "分类",
+            "category": "非技术效果"
+          },
+          {
+            "name": "F1值",
+            "alias": ["F1-Score", "F-Measure"],
+            "type": "分类",
+            "category": "非技术效果"
+          },
+          {
+            "name": "AUC",
+            "alias": ["ROC-AUC", "曲线下面积"],
+            "type": "分类",
+            "category": "非技术效果"
+          },
+          {
+            "name": "均方误差",
+            "alias": ["MSE", "Mean Squared Error"],
+            "type": "回归",
+            "category": "非技术效果"
+          },
+          {
+            "name": "平均绝对误差",
+            "alias": ["MAE", "Mean Absolute Error"],
+            "type": "回归",
+            "category": "非技术效果"
+          },
+          {
+            "name": "收敛速度",
+            "alias": ["Convergence Speed"],
+            "type": "优化",
+            "category": "非技术效果"
+          },
+          {
+            "name": "迭代次数",
+            "alias": ["Iteration Count"],
+            "type": "优化",
+            "category": "非技术效果"
+          },
+          {
+            "name": "训练时间",
+            "alias": ["Training Time"],
+            "type": "效率",
+            "category": "非技术效果"
+          },
+          {
+            "name": "推理时间",
+            "alias": ["Inference Time", "预测时间"],
+            "type": "效率",
+            "category": "非技术效果"
+          },
+          {
+            "name": "模型参数量",
+            "alias": ["Parameters", "模型大小"],
+            "type": "规模",
+            "category": "非技术效果"
+          },
+          {
+            "name": "内存占用",
+            "alias": ["Memory Usage", "显存占用"],
+            "type": "资源",
+            "category": "需结合判断"
+          },
+          {
+            "name": "聚类效果",
+            "alias": ["Clustering Quality", "轮廓系数"],
+            "type": "聚类",
+            "category": "非技术效果"
+          },
+          {
+            "name": "排序质量",
+            "alias": ["Ranking Quality", "NDCG"],
+            "type": "排序",
+            "category": "非技术效果"
+          }
+        ]
+      },
+      "technical_effect_indicators": {
+        "name": "技术效果指标库",
+        "description": "技术性能相关指标，属于技术效果",
+        "indicators": [
+          {
+            "name": "功耗",
+            "alias": ["Power Consumption", "能耗"],
+            "type": "电气",
+            "category": "技术效果",
+            "unit": "W/kW"
+          },
+          {
+            "name": "电池续航",
+            "alias": ["Battery Life", "续航时间"],
+            "type": "电气",
+            "category": "技术效果",
+            "unit": "h/min"
+          },
+          {
+            "name": "时延",
+            "alias": ["Latency", "延迟"],
+            "type": "通信",
+            "category": "技术效果",
+            "unit": "ms/s"
+          },
+          {
+            "name": "响应时间",
+            "alias": ["Response Time"],
+            "type": "系统",
+            "category": "技术效果",
+            "unit": "ms/s"
+          },
+          {
+            "name": "处理速度",
+            "alias": ["Processing Speed", "吞吐量"],
+            "type": "性能",
+            "category": "技术效果",
+            "unit": "fps/Mbps"
+          },
+          {
+            "name": "信噪比",
+            "alias": ["SNR", "Signal-to-Noise Ratio"],
+            "type": "信号",
+            "category": "技术效果",
+            "unit": "dB"
+          },
+          {
+            "name": "误码率",
+            "alias": ["BER", "Bit Error Rate"],
+            "type": "通信",
+            "category": "技术效果",
+            "unit": "-"
+          },
+          {
+            "name": "传输距离",
+            "alias": ["Transmission Distance", "覆盖范围"],
+            "type": "通信",
+            "category": "技术效果",
+            "unit": "m/km"
+          },
+          {
+            "name": "温度精度",
+            "alias": ["Temperature Accuracy"],
+            "type": "测量",
+            "category": "技术效果",
+            "unit": "℃"
+          },
+          {
+            "name": "压力精度",
+            "alias": ["Pressure Accuracy"],
+            "type": "测量",
+            "category": "技术效果",
+            "unit": "Pa/bar"
+          },
+          {
+            "name": "湿度精度",
+            "alias": ["Humidity Accuracy"],
+            "type": "测量",
+            "category": "技术效果",
+            "unit": "%RH"
+          },
+          {
+            "name": "设备寿命",
+            "alias": ["Device Lifetime", "MTBF"],
+            "type": "可靠性",
+            "category": "技术效果",
+            "unit": "h/years"
+          },
+          {
+            "name": "故障率",
+            "alias": ["Failure Rate", "失效率"],
+            "type": "可靠性",
+            "category": "技术效果",
+            "unit": "FIT"
+          },
+          {
+            "name": "发热量",
+            "alias": ["Heat Generation", "温升"],
+            "type": "热学",
+            "category": "技术效果",
+            "unit": "℃/W"
+          },
+          {
+            "name": "带宽",
+            "alias": ["Bandwidth"],
+            "type": "通信",
+            "category": "技术效果",
+            "unit": "Hz/MHz/GHz"
+          },
+          {
+            "name": "分辨率",
+            "alias": ["Resolution"],
+            "type": "显示/传感",
+            "category": "技术效果",
+            "unit": "pixel/dpi"
+          },
+          {
+            "name": "动态范围",
+            "alias": ["Dynamic Range"],
+            "type": "信号",
+            "category": "技术效果",
+            "unit": "dB"
+          },
+          {
+            "name": "灵敏度",
+            "alias": ["Sensitivity"],
+            "type": "传感",
+            "category": "技术效果",
+            "unit": "-"
+          },
+          {
+            "name": "选择性",
+            "alias": ["Selectivity"],
+            "type": "通信",
+            "category": "技术效果",
+            "unit": "dB"
+          }
+        ]
+      },
+      "tech_correlation_signals": {
+        "name": "特定技术关联信号",
+        "description": "识别算法与技术手段绑定的信号",
+        "strong_binding_signals": {
+          "name": "强绑定信号（支持客体）",
+          "patterns": [
+            "根据.*内存容量.*调整",
+            "针对.*图像特性.*设计",
+            "利用.*传感器类型.*优化",
+            "结合.*信道特性.*处理",
+            "适应.*硬件架构.*实现",
+            "根据.*处理器.*特性",
+            "利用.*天线.*参数",
+            "结合.*调制方式.*编码",
+            "针对.*噪声特性.*滤波",
+            "根据.*衰落模型.*均衡"
+          ]
+        },
+        "weak_binding_signals": {
+          "name": "弱绑定信号（不支持客体）",
+          "patterns": [
+            "通过计算机实现",
+            "利用处理器执行",
+            "采用通用算法",
+            "基于云端处理",
+            "使用软件方法",
+            "通过程序实现",
+            "利用数据处理",
+            "采用计算方法"
+          ]
+        }
+      }
+    }
+  }
+}

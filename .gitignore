@@ -1,0 +1,6 @@
+# 机器本地/生成物，不入库（保持开源脱敏）
+# 含本机 chromium 绝对路径，由 tools/setup_env.sh 生成（行内注释会被 git 当成路径的一部分，故必须独占一行）
+tools/puppeteer-config.json
+tools/node_modules/
+**/__pycache__/
+*.pyc
