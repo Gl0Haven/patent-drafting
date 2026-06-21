@@ -1,6 +1,6 @@
 ---
 name: patent-drafting
-description: 中国发明专利端到端起草技能——从论文/代码/交底材料出发，提取创新点，去中国专利局(CNIPA)查新核验新颖性，学习领域写法，做客体适格性(技术方案三要素)自审，并按需撰写技术交底书或说明书。按用户意图分发阶段(查新/学习写法/写交底书/写说明书/全流程/快速修订)，只跑所需环节。Use when drafting or revising a Chinese invention patent: prior-art search, novelty/inventiveness, subject-matter eligibility self-review, or writing the 技术交底书 (disclosure) or 说明书 (specification).
+description: "中国发明专利端到端起草技能——从论文/代码/交底材料出发，提取创新点，去中国专利局(CNIPA)查新核验新颖性，学习领域写法，做客体适格性(技术方案三要素)自审，并按需撰写技术交底书或说明书。按用户意图分发阶段(查新/学习写法/写交底书/写说明书/全流程/快速修订)，只跑所需环节。Use when drafting or revising a Chinese invention patent: prior-art search, novelty/inventiveness, subject-matter eligibility self-review, or writing the 技术交底书 (disclosure) or 说明书 (specification)."
 ---
 
 # 中国发明专利起草（patent-drafting）
