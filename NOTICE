@@ -1,0 +1,85 @@
+patent-drafting
+Copyright the patent-drafting contributors.
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+It integrates or adapts material from the third-party projects listed below.
+The license texts and copyright notices of those projects are reproduced here
+to satisfy their attribution requirements (e.g. the MIT License clause "The
+above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software").
+
+✓ 版权行已对照各上游仓库的实际 LICENSE 核验（核验日 2026-06-21）：
+  - handsomestWei/patent-disclosure-skill：GitHub 许可证 API 识别为 MIT，版权行一致。
+  - sipopark/Patent-Review-Skill：LICENSE 在仓库内 patent-review-skill.zip 的
+    patent-review-skill/LICENSE，为标准 MIT，版权行一致。
+  - snipp-zha/Paper-to-patent-Skill：仓库树（递归）无任何 LICENSE 文件，确认未声明许可证。
+
+================================================================================
+1) handsomestWei/patent-disclosure-skill
+   https://github.com/handsomestWei/patent-disclosure-skill
+   Scope: 本项目的项目扫描、专利点挖掘、CNIPA 查新（cnipa_epub_*.py）、技术交底书
+          生成及部分 Office 文档处理工具（docx_to_md.py / pptx_to_md.py /
+          md_to_docx.py / math_render.py / mermaid_render.py / 交底书 prompt 等）
+          以其公开实现为基础整合与扩展。
+   License: MIT
+
+MIT License
+
+Copyright (c) 2026 handsomestWei
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+2) sipopark/Patent-Review-Skill
+   https://github.com/sipopark/Patent-Review-Skill
+   Scope: 本项目的客体适格性自审（四阶段审查思路、专利法第二条第二款三要素、
+          L1–L5 / G0–G4 锚定、类案匹配 case_matcher.py 与知识库思路）参考其实现，
+          仅抽取起草阶段所需的自审核心。
+   License: MIT（声明于该仓库内 patent-review-skill.zip 的 patent-review-skill/LICENSE，已核对）
+
+MIT License
+
+Copyright (c) 2024 Patent Review Skill Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+3) snipp-zha/Paper-to-patent-Skill
+   https://github.com/snipp-zha/Paper-to-patent-Skill
+   Scope: 仅参考其方法与结构思路（论文来源映射、证据台账、权利要求先行、原生
+          Office Math 公式、完整申请包质量门槛等）。**未纳入其任何源代码或文本。**
+   License: 截至 2026-06-21 其 main 分支未见独立 LICENSE 文件（即默认保留所有权利）。
+            因此本项目不据此再许可其任何内容；如日后发现存在直接复制的代码或文本，
+            应另行取得授权或替换为独立实现。此处仅作来源与方法致谢。

@@ -81,10 +81,10 @@
 
 ```bash
 # 生成（配置→严格渲染→A4 DOCX）
-conda run --no-capture-output -n patent-drafting python "$HOME/.claude/skills/patent-drafting/tools/patent_figures.py" \
+conda run --no-capture-output -n patent-drafting python "$SKILL_DIR/tools/patent_figures.py" \
   --config <figures.json> --out-docx <5-说明书附图.docx> --assets-dir <附图>
 # 验收（不改文件；说明书传 .docx 或 .md/.txt，.doc 先转换）
-conda run --no-capture-output -n patent-drafting python "$HOME/.claude/skills/patent-drafting/tools/patent_figures_check.py" \
+conda run --no-capture-output -n patent-drafting python "$SKILL_DIR/tools/patent_figures_check.py" \
   --config <figures.json> --figures-docx <5-说明书附图.docx> --spec <说明书.md|.docx>
 ```
 

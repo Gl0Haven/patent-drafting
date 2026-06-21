@@ -1,7 +1,7 @@
 # 交底书写作（patent-drafting · §5·交底书）
 
 > 调用方：patent-drafting/SKILL.md。本文件给出技术交底书撰写的要点与对自带交底书工具页的引用。
-> **路径约定**：`references/disclosure-prompts/`、`tools/` 均相对本技能根目录；运行命令以 `$HOME/.claude/skills/patent-drafting/` 为根（`$HOME` 脱敏不含用户名）。权威模板与全套分步指令已并入本技能 `references/disclosure-prompts/`，无外部私有路径依赖。
+> **路径约定**：`references/disclosure-prompts/`、`tools/` 均相对本技能根目录；运行命令以 `$SKILL_DIR`（本技能安装根目录，定义见 SKILL.md「环境」节，宿主无关、脱敏不含用户名）为根。权威模板与全套分步指令已并入本技能 `references/disclosure-prompts/`，无外部私有路径依赖。
 
 ## 权威模板与分步指令（写前必读，均在 references/disclosure-prompts/）
 
@@ -32,8 +32,8 @@
 ## 读料工具命令
 
 ```bash
-conda run --no-capture-output -n patent-drafting python "$HOME/.claude/skills/patent-drafting/tools/docx_to_md.py" --input "<path>.docx" --output "<dir>/<name>.md"
-conda run --no-capture-output -n patent-drafting python "$HOME/.claude/skills/patent-drafting/tools/pptx_to_md.py" --input "<path>.pptx" --output "<dir>/<name>.md"
+conda run --no-capture-output -n patent-drafting python "$SKILL_DIR/tools/docx_to_md.py" --input "<path>.docx" --output "<dir>/<name>.md"
+conda run --no-capture-output -n patent-drafting python "$SKILL_DIR/tools/pptx_to_md.py" --input "<path>.pptx" --output "<dir>/<name>.md"
 ```
 （依赖由 `tools/setup_env.sh` 装好，见 SKILL.md「环境」节；旧版 .ppt 不支持，先另存 .pptx。）
 

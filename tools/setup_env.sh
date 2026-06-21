@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # patent-drafting 专用 conda 环境一键搭建/修复（幂等：已存在则跳过对应步骤）。
-# 用法： bash "$HOME/.claude/skills/patent-drafting/tools/setup_env.sh"
+# 用法： bash <SKILL_DIR>/tools/setup_env.sh   （SKILL_DIR=本技能安装根目录；脚本自身以 $0 定位，无需手设）
 # 注意：所有 conda run 均带 --no-capture-output——否则 Windows 下 conda 用 GBK 重编码子进程输出会崩，
 #       且 capture 模式不透传 stdin（会让 heredoc/交互脚本静默失效）。
 set -e
