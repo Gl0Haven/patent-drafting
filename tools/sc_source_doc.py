@@ -40,8 +40,27 @@ EXCLUDE_DIRS = {
     "vendor", "third_party", "thirdparty", "3rdparty", "deps", "external",
     "site-packages", "migrations", "coverage", ".pytest_cache",
 }
+# 测试目录（默认排除，--include-tests 可保留）：测试非核心独创代码，不宜进 60 页
+TEST_DIRS = {
+    "test", "tests", "__tests__", "spec", "specs", "e2e",
+    "testing", "unittest", "unittests", "cypress",
+}
 # 入口/启动文件名优先级（小写 stem）
 ENTRY_STEMS = ["__main__", "main", "app", "index", "startup", "program", "run"]
+
+
+def is_generated(name):
+    """常见自动生成代码（非作者独创表达），默认不计入。"""
+    low = name.lower()
+    if name.startswith(("moc_", "ui_", "qrc_", "rcc_")):
+        return True
+    gen_suffix = (
+        ".min.js", ".min.css",
+        "_pb2.py", "_pb2_grpc.py", ".pb.go", ".pb.cc", ".pb.h",
+        ".g.dart", ".freezed.dart", ".g.cs", ".designer.cs",
+        ".generated.cs", ".generated.ts", "_rc.py",
+    )
+    return low.endswith(gen_suffix)
 
 
 def is_probably_binary(path):
@@ -53,12 +72,17 @@ def is_probably_binary(path):
         return True
 
 
-def collect_files(srcs, exts, exclude_extra):
-    """递归收集源码文件，返回去重后的绝对路径列表与裁剪明细。"""
+def collect_files(srcs, exts, exclude_extra, include_tests=False, include_generated=False):
+    """递归收集源码文件，返回 (files, excluded_dirs, stats)。
+    默认排除测试目录与自动生成代码（--include-tests / --include-generated 可保留）。"""
     exts = {e.lower() for e in exts}
+    skip_dirs = set(EXCLUDE_DIRS) | set(exclude_extra)
+    if not include_tests:
+        skip_dirs |= TEST_DIRS
     excluded_dirs = set()
     files = []
     seen = set()
+    n_generated = 0
     for src in srcs:
         src = os.path.abspath(src)
         if not os.path.isdir(src):
@@ -68,7 +92,7 @@ def collect_files(srcs, exts, exclude_extra):
             # 原地裁剪要遍历的子目录
             kept = []
             for d in dirs:
-                if d in EXCLUDE_DIRS or d in exclude_extra:
+                if d.lower() in skip_dirs:
                     excluded_dirs.add(d)
                 else:
                     kept.append(d)
@@ -77,22 +101,28 @@ def collect_files(srcs, exts, exclude_extra):
                 ext = os.path.splitext(name)[1].lower()
                 if ext not in exts:
                     continue
+                if not include_generated and is_generated(name):
+                    n_generated += 1
+                    continue
                 p = os.path.join(root, name)
                 rp = os.path.realpath(p)
                 if rp in seen:
-                    continue
-                if name.endswith((".min.js", ".min.css")):
                     continue
                 if is_probably_binary(p):
                     continue
                 seen.add(rp)
                 files.append(p)
-    return files, sorted(excluded_dirs)
+    return files, sorted(excluded_dirs), {"generated_skipped": n_generated}
 
 
-def order_files(files):
-    """入口/启动文件置首，其余按相对路径稳定排序。"""
+def order_files(files, tail_pat=None):
+    """入口/启动文件置首，其余按相对路径稳定排序；tail_pat 命中的文件强制置于末尾
+    （便于让末页落在程序自然结尾，审核员通常会看末页是否程序结束）。"""
+    tp = tail_pat.lower() if tail_pat else None
+
     def rank(p):
+        if tp and tp in p.lower():
+            return (200, p)  # 末尾
         stem = os.path.splitext(os.path.basename(p))[0].lower()
         ext = os.path.splitext(p)[1].lower()
         if ext == ".mlapp":
@@ -222,6 +252,9 @@ def main():
     ap.add_argument("--pages-each-side", type=int, default=30, help="前/后各取多少页（默认 30）")
     ap.add_argument("--ext", action="append", default=None, help="覆盖默认扩展名白名单（可多次，如 --ext .py）")
     ap.add_argument("--exclude-dir", action="append", default=[], help="额外排除目录名（可多次）")
+    ap.add_argument("--include-tests", action="store_true", help="保留测试目录（默认排除 test/tests/spec/e2e 等）")
+    ap.add_argument("--include-generated", action="store_true", help="保留自动生成代码（默认排除 moc_/ui_/*_pb2.py/*.designer.cs 等）")
+    ap.add_argument("--tail-file", default=None, help="将路径含该子串的文件强制排到末尾，使末页落在程序结尾")
     ap.add_argument("--strip-comments", action="store_true", help="额外去掉纯括号行/极短注释行")
     ap.add_argument("--no-file-marker", action="store_true", help="不在每个文件前插入 // ===== 路径 ===== 标记行")
     ap.add_argument("--font", default="Consolas", help="等宽字体（默认 Consolas）")
@@ -230,29 +263,49 @@ def main():
     args = ap.parse_args()
 
     exts = args.ext if args.ext else DEFAULT_EXTS
-    files, excluded = collect_files(args.src, exts, set(args.exclude_dir))
+    files, excluded, stats = collect_files(
+        args.src, exts, set(args.exclude_dir),
+        include_tests=args.include_tests, include_generated=args.include_generated)
     if not files:
         print("[错误] 未收集到任何源码文件。请检查 --src 路径与 --ext 白名单。", file=sys.stderr)
         sys.exit(2)
-    files = order_files(files)
+    files = order_files(files, tail_pat=args.tail_file)
     root_marker = os.path.abspath(args.src[0]) if len(args.src) == 1 else None
     lines, total_lines, per_file, last_line = read_code_lines(
         files, root_marker, args.strip_comments, not args.no_file_marker)
     selected, pages, truncated = select_pages(lines, args.lines_per_page, args.pages_each_side)
 
+    # 语言分布（按扩展名统计清洗后行数），便于发现多语言混排
+    lang = {}
+    for p, c in per_file:
+        lang[os.path.splitext(p)[1].lower()] = lang.get(os.path.splitext(p)[1].lower(), 0) + c
+    lang_sorted = sorted(lang.items(), key=lambda kv: -kv[1])
+
     # 统计与自检报告（始终打印）
     print("==== 软著源代码材料 统计 ====")
     print(f"收集文件数      : {len(files)}")
-    print(f"使用扩展名      : {sorted({os.path.splitext(p)[1].lower() for p in files})}")
-    print(f"排除目录(命中)  : {excluded if excluded else '无'}")
+    print(f"语言分布(行)    : {', '.join(f'{e}={n}' for e, n in lang_sorted) or '无'}")
+    print(f"排除目录(命中)  : {excluded if excluded else '无'}"
+          + ("" if args.include_tests else "（含默认排除的测试目录）"))
+    print(f"排除自动生成码  : {stats['generated_skipped']} 个文件"
+          + ("（已用 --include-generated 保留）" if args.include_generated else ""))
     print(f"清洗后总代码行数: {total_lines} 行   <-- 回填申请表'源程序量'（记得带'行'字）")
     print(f"自然总页数      : {pages if not truncated else math.ceil(total_lines/args.lines_per_page)}（每页{args.lines_per_page}行）")
     if truncated:
         print(f"裁剪策略        : 超过 {2*args.pages_each_side} 页 -> 取前 {args.pages_each_side} 页 + 后 {args.pages_each_side} 页 = {pages} 页")
     else:
         print(f"裁剪策略        : 不足 {2*args.pages_each_side} 页 -> 全部提交（{pages} 页）")
+    print(f"末文件          : {os.path.basename(files[-1]) if files else '无'}")
     print(f"末行(应为程序结尾): {last_line[:80]!r}")
     print("自检提醒        : 名称三处需一致(申请表/源码页眉/说明书页眉)；确认末页落在程序自然结尾。")
+    # 多语言混排提醒
+    big = [e for e, n in lang_sorted if n >= max(50, int(0.1 * total_lines))]
+    if len(big) > 1:
+        print(f"[提醒] 检测到多语言混排（{', '.join(big)}）。如只想收主语言，用 --ext 限定，例如 --ext .py。", file=sys.stderr)
+    # 末页结尾提醒
+    if truncated and not args.tail_file:
+        print("[提醒] 已截断为前30+后30页，末页可能停在边角文件中段。"
+              "可用 --tail-file <主程序文件名子串> 把它排到末尾，使末页落在程序结尾。", file=sys.stderr)
 
     if args.dry_run:
         print("[dry-run] 未生成 docx。")
